@@ -594,9 +594,7 @@ button:active {
 }
 
 .q-icon-area {
-  font-size: 3.6rem;
-  line-height: 1;
-  letter-spacing: 4px;
+  display: none; /* emoji hints above questions hidden — avoids giving away answers */
 }
 
 .q-text {
@@ -1097,9 +1095,6 @@ button:active {
   }
   .opt-text {
     font-size: 0.95rem;
-  }
-  .q-icon-area {
-    font-size: 3rem;
   }
   .res-stats {
     grid-template-columns: repeat(2, 1fr);
