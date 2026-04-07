@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Olympiad Genius — Exam Simulator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ══════════════════════════════════════════════════
+       SCREEN 1 · WELCOME
+  ══════════════════════════════════════════════════ -->
+    <div id="welcomeScreen" class="screen active">
+      <div class="wlc-wrap">
+        <!-- Logo -->
+        <div class="wlc-logo-row">
+          <div class="wlc-logo-icon">🏆</div>
+          <div class="wlc-logo-text">
+            <span class="wlc-brand">Olympiad</span>
+            <span class="wlc-sub">Genius</span>
+          </div>
+        </div>
+
+        <!-- Card -->
+        <div class="wlc-card">
+          <p class="wlc-tagline">
+            Select your subject, level &amp; set to begin
+          </p>
+
+          <!-- Subject -->
+          <div class="wlc-section-label">📚 Choose Subject</div>
+          <div class="subj-grid">
+            <button
+              class="wlc-btn subj-btn sel"
+              data-val="maths"
+              onclick="pick('subj', this)"
+            >
+              <span class="wlc-btn-icon">🔢</span>
+              <span class="wlc-btn-text">Maths</span>
+            </button>
+            <button
+              class="wlc-btn subj-btn"
+              data-val="science"
+              onclick="pick('subj', this)"
+            >
+              <span class="wlc-btn-icon">🔬</span>
+              <span class="wlc-btn-text">Science</span>
+            </button>
+          </div>
+
+          <!-- Difficulty -->
+          <div class="wlc-section-label">⚡ Choose Difficulty</div>
+          <div class="diff-grid">
+            <button
+              class="wlc-btn diff-btn sel"
+              data-val="easy"
+              onclick="pick('diff', this)"
+            >
+              <span class="wlc-btn-icon">🟢</span>
+              <span class="wlc-btn-text">Easy</span>
+              <span class="wlc-btn-sub">25 Qs</span>
+            </button>
+            <button
+              class="wlc-btn diff-btn"
+              data-val="medium"
+              onclick="pick('diff', this)"
+            >
+              <span class="wlc-btn-icon">🟡</span>
+              <span class="wlc-btn-text">Medium</span>
+              <span class="wlc-btn-sub">25 Qs</span>
+            </button>
+            <button
+              class="wlc-btn diff-btn"
+              data-val="hard"
+              onclick="pick('diff', this)"
+            >
+              <span class="wlc-btn-icon">🔴</span>
+              <span class="wlc-btn-text">Hard</span>
+              <span class="wlc-btn-sub">25 Qs</span>
+            </button>
+          </div>
+
+          <!-- Set -->
+          <div class="wlc-section-label">📋 Choose Set</div>
+          <div class="set-grid">
+            <button
+              class="wlc-btn set-btn sel"
+              data-val="1"
+              onclick="pick('set', this)"
+            >
+              Set&nbsp;1
+            </button>
+            <button
+              class="wlc-btn set-btn"
+              data-val="2"
+              onclick="pick('set', this)"
+            >
+              Set&nbsp;2
+            </button>
+            <button
+              class="wlc-btn set-btn"
+              data-val="3"
+              onclick="pick('set', this)"
+            >
+              Set&nbsp;3
+            </button>
+            <button
+              class="wlc-btn set-btn"
+              data-val="4"
+              onclick="pick('set', this)"
+            >
+              Set&nbsp;4
+            </button>
+            <button
+              class="wlc-btn set-btn"
+              data-val="5"
+              onclick="pick('set', this)"
+            >
+              Set&nbsp;5
+            </button>
+          </div>
+
+          <!-- Info row -->
+          <div class="wlc-info-row">
+            <span class="info-chip">⏱ 25 mins</span>
+            <span class="info-chip">📝 25 Qs</span>
+            <span class="info-chip">🏅 Grade 1</span>
+          </div>
+
+          <button class="start-btn" onclick="startExam()">
+            <span>Start Exam</span>
+            <span class="start-arrow">→</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+       SCREEN 2 · EXAM
+  ══════════════════════════════════════════════════ -->
+    <div id="examScreen" class="screen">
+      <!-- TOP BAR -->
+      <div class="exam-topbar">
+        <div class="topbar-left">
+          <button class="topbar-back" onclick="confirmBack()">← Exit</button>
+          <span class="topbar-title" id="topbarTitle"
+            >Maths · Easy · Set 1</span
+          >
+        </div>
+        <div class="topbar-right">
+          <div class="timer-wrap" id="timerWrap">
+            <span class="timer-icon">⏱</span>
+            <span class="timer-val" id="timerVal">25:00</span>
+          </div>
+          <button class="submit-btn-top" onclick="openSubmitModal()">
+            Submit
+          </button>
+        </div>
+      </div>
+
+      <!-- BODY: palette + content -->
+      <div class="exam-body">
+        <!-- LEFT PALETTE -->
+        <aside class="palette-panel" id="palettePanel">
+          <div class="palette-header">
+            <span>Questions</span>
+            <button
+              class="palette-toggle"
+              id="paletteToggle"
+              onclick="togglePalette()"
+            >
+              ◀
+            </button>
+          </div>
+          <div class="palette-grid" id="paletteGrid">
+            <!-- filled by JS -->
+          </div>
+          <div class="palette-legend">
+            <div class="leg-item">
+              <span class="leg-dot" style="background: #facc15"></span>Not
+              answered
+            </div>
+            <div class="leg-item">
+              <span class="leg-dot" style="background: #22c55e"></span>Answered
+            </div>
+            <div class="leg-item">
+              <span class="leg-dot" style="background: #3b82f6"></span>Current
+            </div>
+          </div>
+          <div class="palette-stats" id="paletteStats">0 / 25 answered</div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="exam-main" id="examMain">
+          <!-- Question meta row -->
+          <div class="q-meta-row">
+            <span class="qnum-label" id="qNumLabel">Question 1 of 25</span>
+            <div class="q-badges">
+              <span class="badge badge-diff" id="badgeDiff">🟢 Easy</span>
+              <span class="badge badge-subj" id="badgeSubj">🔢 Maths</span>
+              <span class="badge badge-topic" id="badgeTopic">📌 Counting</span>
+            </div>
+          </div>
+
+          <!-- Question card -->
+          <div class="q-card">
+            <div class="q-icon-area" id="qIconArea"></div>
+            <p class="q-text" id="qText">Question text here</p>
+          </div>
+
+          <!-- Options 2×2 grid -->
+          <div class="opts-grid" id="optsGrid">
+            <!-- filled by JS -->
+          </div>
+
+          <!-- Navigation -->
+          <div class="nav-bar">
+            <button
+              class="nav-btn nav-prev"
+              id="prevBtn"
+              onclick="navigate(-1)"
+            >
+              ← Prev
+            </button>
+            <div class="nav-center">
+              <span class="nav-progress" id="navProg">1 / 25</span>
+            </div>
+            <button class="nav-btn nav-next" id="nextBtn" onclick="navigate(1)">
+              Next →
+            </button>
+          </div>
+        </main>
+      </div>
+      <!-- exam-body -->
+    </div>
+    <!-- examScreen -->
+
+    <!-- ══════════════════════════════════════════════════
+       SCREEN 3 · RESULT
+  ══════════════════════════════════════════════════ -->
+    <div id="resultScreen" class="screen">
+      <div class="res-wrap">
+        <div class="res-card">
+          <div class="res-trophy" id="resTrophy">🏆</div>
+          <h2 class="res-heading" id="resHeading">Well Done!</h2>
+
+          <div class="res-score-ring">
+            <svg viewBox="0 0 100 100" class="ring-svg">
+              <circle cx="50" cy="50" r="42" class="ring-bg" />
+              <circle cx="50" cy="50" r="42" class="ring-fill" id="ringFill" />
+            </svg>
+            <div class="ring-text">
+              <div class="ring-score" id="ringScore">20/25</div>
+              <div class="ring-pct" id="ringPct">80%</div>
+            </div>
+          </div>
+
+          <div class="res-stats">
+            <div class="rstat">
+              <div class="rstat-val" id="rCorrect">20</div>
+              <div class="rstat-label">Correct</div>
+            </div>
+            <div class="rstat">
+              <div class="rstat-val" id="rWrong">5</div>
+              <div class="rstat-label">Wrong</div>
+            </div>
+            <div class="rstat">
+              <div class="rstat-val" id="rSkipped">0</div>
+              <div class="rstat-label">Skipped</div>
+            </div>
+            <div class="rstat">
+              <div class="rstat-val" id="rTime">20:00</div>
+              <div class="rstat-label">Time Used</div>
+            </div>
+          </div>
+
+          <div class="res-review-title">Question Review</div>
+          <div class="res-review-list" id="resReviewList">
+            <!-- filled by JS -->
+          </div>
+
+          <div class="res-actions">
+            <button class="res-btn res-btn-secondary" onclick="retake()">
+              🔄 Retake
+            </button>
+            <button class="res-btn res-btn-primary" onclick="goHome()">
+              🏠 Home
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+       MODALS
+  ══════════════════════════════════════════════════ -->
+    <div
+      id="submitModal"
+      class="modal-overlay"
+      onclick="closeSubmitModal(event)"
+    >
+      <div class="modal-card">
+        <div class="modal-icon">📋</div>
+        <h3 class="modal-title">Submit Exam?</h3>
+        <p class="modal-body" id="submitModalBody">
+          You have answered 0 of 25 questions.
+        </p>
+        <div class="modal-btns">
+          <button class="modal-btn modal-cancel" onclick="closeSubmitModal()">
+            Continue
+          </button>
+          <button class="modal-btn modal-confirm" onclick="submitExam()">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="timeupModal" class="modal-overlay">
+      <div class="modal-card">
+        <div class="modal-icon">⏰</div>
+        <h3 class="modal-title">Time's Up!</h3>
+        <p class="modal-body">Your exam has been submitted automatically.</p>
+        <div class="modal-btns">
+          <button class="modal-btn modal-confirm" onclick="submitExam()">
+            See Results
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="backModal" class="modal-overlay" onclick="closeBackModal(event)">
+      <div class="modal-card">
+        <div class="modal-icon">⚠️</div>
+        <h3 class="modal-title">Exit Exam?</h3>
+        <p class="modal-body">Progress will be lost. Are you sure?</p>
+        <div class="modal-btns">
+          <button class="modal-btn modal-cancel" onclick="closeBackModal()">
+            Stay
+          </button>
+          <button class="modal-btn modal-confirm" onclick="exitExam()">
+            Exit
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
