@@ -18,7 +18,8 @@
   --danger-pale: #fef2f2;
   --page-bg: #f3f4f6;
   --card-bg: #ffffff;
-  --q-card-bg: #f7f7f7;
+  --q-card-bg: #e8f0fe; /* soft sky-blue for question card */
+  --opt-card-bg: #f3f0ff; /* soft lavender for option cards */
   --grey-100: #f3f4f6;
   --grey-200: #e5e7eb;
   --grey-400: #9ca3af;
@@ -582,15 +583,15 @@ button:active {
 .q-card {
   background: var(--q-card-bg);
   border-radius: var(--radius-lg);
-  padding: 24px 22px;
+  padding: 28px 26px;
   box-shadow: var(--shadow-md);
-  border: 1px solid var(--grey-200);
+  border: 1.5px solid #c7d9f9;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 14px;
   text-align: center;
-  min-height: 130px;
+  min-height: 140px;
 }
 
 .q-icon-area {
@@ -598,11 +599,11 @@ button:active {
 }
 
 .q-text {
-  font-size: 1.22rem;
+  font-size: 1.42rem;
   font-weight: 800;
-  color: var(--grey-800);
-  line-height: 1.55;
-  max-width: 680px;
+  color: #1e3a5f;
+  line-height: 1.6;
+  max-width: 700px;
 }
 
 /* ── Options 2×2 Grid ── */
@@ -613,9 +614,9 @@ button:active {
 }
 
 .opt-card {
-  background: var(--card-bg);
+  background: var(--opt-card-bg);
   border-radius: var(--radius-lg);
-  border: 2.5px solid var(--grey-200);
+  border: 2px solid #d8d0f5;
   box-shadow: var(--shadow-md);
   padding: 20px 16px 18px;
   display: flex;
@@ -663,10 +664,10 @@ button:active {
 }
 
 .opt-text {
-  font-size: 1.08rem;
+  font-size: 1.18rem;
   font-weight: 800;
-  color: var(--grey-800);
-  line-height: 1.35;
+  color: #2d1b6e;
+  line-height: 1.4;
   margin-top: 10px;
 }
 
@@ -1071,10 +1072,10 @@ button:active {
     padding: 14px 16px 28px;
   }
   .q-text {
-    font-size: 1.12rem;
+    font-size: 1.28rem;
   }
   .opt-text {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 }
 
@@ -1087,14 +1088,14 @@ button:active {
     grid-template-columns: repeat(4, 1fr);
   }
   .q-text {
-    font-size: 1.06rem;
+    font-size: 1.2rem;
   }
   .opt-card {
     padding: 16px 12px 14px;
     min-height: 88px;
   }
   .opt-text {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
   }
   .res-stats {
     grid-template-columns: repeat(2, 1fr);
@@ -1155,10 +1156,10 @@ button:active {
     gap: 8px;
   }
   .q-text {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
   .opt-text {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
   .opt-card {
     min-height: 80px;
